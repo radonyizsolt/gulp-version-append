@@ -9,6 +9,11 @@ var gutil = require('gulp-util'),
 			var exts = extensions.join('|'),
 				regexString = "(\\.(?:" + exts + ")\\?v=)(\\@version\\@)([\\w=&]*['|\"])";
 			return new RegExp(regexString, 'ig');
+		},
+		suffixRegex: function (extensions) {
+			var exts = extensions.join('|'),
+				regexString = "(\\.(?:"+exts+")\\?v=)(\@\@version\@\@)([\\w=&]*['|\"])";
+			return new RegExp(regexString, 'ig');
 		}
 	},
 	/**
@@ -65,6 +70,11 @@ var gutil = require('gulp-util'),
 				version = pJson && pJson.version;
 			}
 			console.log('AAA', version);
+			console.log(options);
+			if(options.suffix){
+				file.contents = new Buffer(file.contents.toString().replace(defaults.suffixRegex(extensions), '_' + version + '$1' + version + '$3'));
+			}
+			console.log(extensions.join('|'));
 			file.contents = new Buffer(file.contents.toString().replace(defaults.versionRegex(extensions), '$1' + version + '$3'));
 			cb(null, file);
 		});
