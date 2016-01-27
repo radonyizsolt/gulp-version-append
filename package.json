@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SkeLLLa/gulp-version-append.git"
+    "url": "git+https://github.com/radonyizsolt/gulp-version-append.git"
   },
   "license": "MIT",
   "bugs": {
